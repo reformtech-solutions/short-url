@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-10
+
+### Added
+- `Reformtech\ShortUrl\Http\RedirectHandler` — handles the full "read short
+  code from the request, resolve it, send the redirect" flow for plain PHP
+  projects, so it no longer needs to be hand-written per project. Mirrors
+  what the Laravel `RedirectController` already did automatically.
+
 ## [0.1.0] - 2026-09-10
 
 ### Added

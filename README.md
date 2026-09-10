@@ -24,6 +24,7 @@ Laravel layer is an optional add-on, not a requirement.
 - [Usage: Plain PHP](#usage-plain-php)
   - [Quick Start](#quick-start)
   - [Custom Storage Backends](#custom-storage-backends)
+  - [Handling Redirects](#handling-redirects)
 - [Usage: Laravel](#usage-laravel)
   - [Quick Start](#quick-start-1)
   - [The Fluent Builder](#the-fluent-builder)
@@ -128,6 +129,31 @@ For quick scripts or tests, skip the database entirely:
 use Reformtech\ShortUrl\Storage\ArrayStorage;
 
 $shortener = new UrlShortener(new ArrayStorage());
+```
+
+### Handling Redirects
+
+Resolving a code is only half the job — the package also handles the
+"visitor hits the short URL, gets redirected" flow, via `RedirectHandler`.
+No manual `$_GET` reading, `header()` calls, or try/catch required:
+
+```php
+// index.php
+use Reformtech\ShortUrl\Http\RedirectHandler;
+
+$shortener = /* however you built it above */;
+
+(new RedirectHandler($shortener))->handle();
+```
+
+Point your webserver (or `php -S localhost:8000`) at this script, then visit
+`index.php?s={code}` — it resolves the code and issues a `302` redirect
+automatically. Missing code → `400`. Unknown code → `404`.
+
+By default it reads the code from the `s` query parameter. Customize it:
+
+```php
+(new RedirectHandler($shortener, queryParam: 'code', redirectStatus: 301))->handle();
 ```
 
 ### Custom Storage Backends
