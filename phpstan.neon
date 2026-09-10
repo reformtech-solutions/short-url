@@ -1,0 +1,8 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - src/Laravel/Models/Factories
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
