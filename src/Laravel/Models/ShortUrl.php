@@ -70,7 +70,7 @@ class ShortUrl extends Model
     /**
      * Find every ShortUrl model that redirects to the given destination URL.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, self>
+     * @return \Illuminate\Database\Eloquent\Collection<int, static>
      */
     public static function findByDestinationUrl(string $url): \Illuminate\Database\Eloquent\Collection
     {

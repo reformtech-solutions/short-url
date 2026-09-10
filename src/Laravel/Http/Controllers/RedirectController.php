@@ -21,7 +21,7 @@ class RedirectController extends Controller
             abort(404, 'Short URL not found.');
         }
 
-        $shortUrl->increment('clicks');
+        ShortUrl::query()->where('id', $shortUrl->id)->increment('clicks');
 
         if ($shortUrl->single_use) {
             $shortUrl->forceFill(['used_at' => now()])->save();
@@ -45,13 +45,16 @@ class RedirectController extends Controller
     {
         $fields = (array) config('short-url.tracking.fields', []);
 
-        return $shortUrl->visits()->create([
+        /** @var ShortUrlVisit $visit */
+        $visit = $shortUrl->visits()->create([
             'ip_address' => ($fields['ip_address'] ?? true) ? $request->ip() : null,
             'user_agent' => ($fields['user_agent'] ?? true) ? $request->userAgent() : null,
             'device_type' => ($fields['device_type'] ?? true) ? $this->guessDeviceType($request->userAgent()) : null,
             'referer_url' => ($fields['referer_url'] ?? true) ? $request->headers->get('referer') : null,
             'visited_at' => now(),
         ]);
+
+        return $visit;
     }
 
     /**

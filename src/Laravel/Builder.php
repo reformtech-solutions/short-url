@@ -171,10 +171,10 @@ class Builder
     private function generateUniqueKey(): string
     {
         $length = (int) config('short-url.key_length', 5);
-        $generator = new CodeGenerator(max(3, $length));
+        $this->codeGenerator = new CodeGenerator(max(3, $length));
 
         do {
-            $key = $generator->generate();
+            $key = $this->codeGenerator->generate();
         } while (ShortUrl::query()->where('url_key', $key)->exists());
 
         return $key;

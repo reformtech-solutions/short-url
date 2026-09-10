@@ -22,7 +22,7 @@ class EloquentStorage implements StorageInterface
 {
     public function save(string $code, string $originalUrl, ?\DateTimeInterface $expiresAt = null): void
     {
-        ShortUrl::create([
+        ShortUrl::query()->create([
             'url_key' => $code,
             'destination_url' => $originalUrl,
             'clicks' => 0,
