@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-10
+
+### Fixed
+- `Laravel\Builder`: the constructor-injected `CodeGenerator` was silently
+  ignored — `generateUniqueKey()` was creating a fresh default generator
+  every time instead of using the one passed in. Anyone injecting a custom
+  `CodeGenerator` into `Builder` was being silently overridden.
+- CI: excluded the invalid PHP 8.1 + Laravel 11 matrix combination (Laravel
+  11 requires PHP 8.2+).
+- CI: resolved Composer 2.9's native security-advisory blocking preventing
+  dev dependencies from resolving at all.
+- Static analysis: resolved all PHPStan findings (imprecise generic
+  docblocks, Eloquent magic-method visibility gaps); bumped PHPStan to ^2.2.
+
 ## [0.2.0] - 2026-09-10
 
 ### Added
