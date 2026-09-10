@@ -1,0 +1,45 @@
+# Dependencies
+/vendor
+/node_modules
+composer.lock
+
+# Testing & static analysis artifacts
+.phpunit.result.cache
+.phpunit.cache
+/phpunit.xml.dist
+/.phpunit.cache
+/coverage
+.phpstan-cache
+/build
+
+# Environment files
+.env
+.env.backup
+.env.*.local
+
+# IDE / editor
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+.fleet
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Composer
+composer.phar
+auth.json
