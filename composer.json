@@ -22,7 +22,12 @@
         "phpstan/phpstan": "^1.10"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "policy": {
+            "advisories": {
+                "block": false
+            }
+        }
     },
     "suggest": {
         "illuminate/support": "Required if you want to use the Laravel integration layer (facade, service provider).",
